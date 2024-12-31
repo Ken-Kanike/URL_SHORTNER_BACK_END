@@ -12,8 +12,10 @@ const shortUrl_1 = __importDefault(require("./routes/shortUrl"));
 dotenv_1.default.config();
 // Connect to MongoDB
 (0, dbConfig_1.default)();
-const port = process.env.PORT || 5001;
-const clientAppUrl = process.env.CLIENT_APP_URL || 'http://localhost:3000'; // Default to localhost if CLIENT_APP_URL is missing
+const BASE_SERVER_URL = process.env.BASE_SERVER_URL;
+console.log("Base Server URL: " + BASE_SERVER_URL);
+const server_port = process.env.PORT || 5001;
+const CLIENT_APP_URL = 'https://url-shortner-app-js.netlify.app'; // Default to localhost if CLIENT_APP_URL is missing
 // Initialize Express application
 const app = (0, express_1.default)();
 // Middleware for parsing JSON and URL-encoded data
@@ -21,7 +23,7 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 // CORS configuration
 app.use((0, cors_1.default)({
-    origin: clientAppUrl, // Allow requests from the client app
+    origin: [CLIENT_APP_URL, 'http://localhost:3000'], // Allow both local and production URLs
     credentials: true, // Include credentials such as cookies
 }));
 // Routes
@@ -35,9 +37,9 @@ app.use((err, req, res, next) => {
     });
 });
 // Start the server
-app.listen(port, () => {
-    console.log(`✅ Server running on port ${port}`);
-    console.log(`✅ Allowed Client App URL: ${clientAppUrl}`);
+app.listen(server_port, () => {
+    console.log(`✅ Server running on port ${server_port}`);
+    console.log(`✅ Allowed Client App URLs: ${CLIENT_APP_URL}, https://url-shortner-app-js.netlify.app/ `);
 });
 // import express from 'express';
 // import dotenv from 'dotenv';
