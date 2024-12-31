@@ -13,7 +13,7 @@ connectDb();
 const BASE_SERVER_URL = process.env.BASE_SERVER_URL;
 console.log("Base Server URL: " + BASE_SERVER_URL);
 const server_port = process.env.PORT || 5001;
-const CLIENT_APP_URL = 'https://url-shortner-react-app.vercel.app'; // Default to localhost if CLIENT_APP_URL is missing
+const CLIENT_APP_URL = 'https://url-shortner-app-js.netlify.app'; // Default to localhost if CLIENT_APP_URL is missing
 
 // Initialize Express application
 const app = express();
@@ -45,7 +45,7 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 // Start the server
 app.listen(server_port, () => {
   console.log(`✅ Server running on port ${server_port}`);
-  console.log(`✅ Allowed Client App URLs: ${CLIENT_APP_URL}, https://url-shortner-react-app.vercel.app`);
+  console.log(`✅ Allowed Client App URLs: ${CLIENT_APP_URL}, https://url-shortner-app-js.netlify.app/ `);
 });
 
 
